@@ -1,0 +1,41 @@
+//tabla Persona
+npx sequelize-cli model:generate --name Persona --attributes nombreCompleto:string,numeroIdentidad:string,direccion:string,edad:string,numeroTelefono:string
+
+//tabla idioma
+npx sequelize-cli model:generate --name Idioma --attributes nombre:string, descripcion:string, precio:float, totalEstudiante:integer
+
+//tabla factura
+npx sequelize-cli model:generate --name Factura --attributes fechaIngreso:date, montoFinal:float
+
+//tabla estudiante 
+npx sequelize-cli model:generate --name Estudiante --attributes nombreUsuario:string, fechaRegistro:date, password:string, codigoSeguridad:string 
+
+//tabla maestro
+npx sequelize-cli model:generate --name Maestro --attributes nombreUsuario:string, descripcion:string, password:string, codigoSeguridad:string 
+
+//tabla administrador
+npx sequelize-cli model:generate --name Administrador --attributes nombreUsuario:string, descripcion:string, password:string
+
+//tabla correo
+npx sequelize-cli model:generate --name Correo --attributes email:string
+
+//relacion tabla Persona-Estudiante
+npx sequelize-cli migration:generate --name relacion-persona-estudiante
+
+
+//relacion tabla Persona-Maestro
+npx sequelize-cli migration:generate --name relacion-persona-maestro
+
+//relacion tabla Persona-Administrador
+npx sequelize-cli migration:generate --name relacion-persona-administrador
+
+/relacion tabla Persona-Correo
+npx sequelize-cli migration:generate --name relacion-persona-correo
+
+
+//crear tabla
+npx sequelize-cli db:migrate
+
+//eliminar tabla
+npx sequelize-cli db:migrate:undo //solo elimina la tabla mas reciente que se creo
+
