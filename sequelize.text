@@ -31,6 +31,13 @@ npx sequelize-cli migration:generate --name relacion-persona-administrador
 
 /relacion tabla Persona-Correo
 npx sequelize-cli migration:generate --name relacion-persona-correo
+//relacion tabla Maestro-MaestroIdiomas
+npx sequelize-cli migration:generate --name relacion-maestro-maestroIdioma
+
+//relacion tabla Seccion-Idioma
+npx sequelize-cli migration:generate --name relacion-seccion-idioma
+
+
 
 
 //crear tabla
