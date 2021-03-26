@@ -19,9 +19,23 @@ npx sequelize-cli model:generate --name Administrador --attributes nombreUsuario
 //tabla correo
 npx sequelize-cli model:generate --name Correo --attributes email:string
 
+//tabla maestroIdioma
+npx sequelize-cli model:generate --name MaestroIdiomas --attributes descripcion:string
+
+//tabla seccion
+npx sequelize-cli model:generate --name Seccion --attributes horaInicio:integer, horaFin:integer, cuposMaximos:integer, dias:string
+
+//tabla matricula
+npx sequelize-cli model:generate --name Matricula --attributes estadoCuenta:string
+
+//tabla calificacion
+npx sequelize-cli model:generate --name Calificacion --attributes nota:float, estado:string
+
+//tabla estudianteIdioma
+npx sequelize-cli model:generate --name EstudianteIdioma --attributes descripcion:string
+
 //relacion tabla Persona-Estudiante
 npx sequelize-cli migration:generate --name relacion-persona-estudiante
-
 
 //relacion tabla Persona-Maestro
 npx sequelize-cli migration:generate --name relacion-persona-maestro
@@ -31,13 +45,18 @@ npx sequelize-cli migration:generate --name relacion-persona-administrador
 
 /relacion tabla Persona-Correo
 npx sequelize-cli migration:generate --name relacion-persona-correo
+
 //relacion tabla Maestro-MaestroIdiomas
 npx sequelize-cli migration:generate --name relacion-maestro-maestroIdioma
 
 //relacion tabla Seccion-Idioma
 npx sequelize-cli migration:generate --name relacion-seccion-idioma
 
+//relacion tabla Matricula-estudiante-maestro-seccion-factura
+npx sequelize-cli migration:generate --name relacion-matricula-estudiante
 
+//relacion tabla Estudiante-EstudianteIdiomas
+npx sequelize-cli migration:generate --name relacion-estudiante-estudianteIdioma
 
 
 //crear tabla
