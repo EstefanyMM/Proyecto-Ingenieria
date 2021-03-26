@@ -1,5 +1,5 @@
 const { request, response } = require("express");
-const Usuarios = require('../models').Matricula;
+const Usuarios = require('../models').Usuario;
 
 const getUsuarios = async (req = request, res = response) => {
     
