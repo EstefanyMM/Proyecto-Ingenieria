@@ -14,6 +14,8 @@ var rutaPersona = require('./router/persona');
 var rutaCalificacion = require('./router/calificaciones');
 var rutaEstudiantes = require('./router/estudiante');
 var rutaCorreo = require('./router/correo');
+var rutaIdioma = require('./router/idioma');
+var rutaMaestro = require('./router/maestro');
 
 
 // uso de rutas
@@ -22,6 +24,8 @@ app.use('/persona', rutaPersona);
 app.use('/calificaciones', rutaCalificacion);
 app.use('/estudiante', rutaEstudiantes);
 app.use('/correo', rutaCorreo);
+app.use('/idioma', rutaIdioma);
+app.use('/maestro', rutaMaestro);
 
 
 
