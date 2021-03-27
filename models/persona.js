@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Persona.hasMany(models.Estudiante)
       Persona.hasMany(models.Correo)
+      Persona.hasMany(models.Maestro)
     }
   };
   Persona.init({
