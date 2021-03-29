@@ -9,9 +9,9 @@ router.get('/:id', maestro.obtenerMaestro);
 
 router.post('/', maestro.agregarMaestro);
 
-router.put('/', maestro.editarMaestro);
+router.put('/:id', maestro.editarMaestro);
 
-router.delete('/', maestro.eliminarMaestro);
+router.delete('/:id', maestro.eliminarMaestro);
 
  router.get('/idioma/:id',maestro.getIdiomasPorMaestro);
 

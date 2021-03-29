@@ -61,12 +61,29 @@ const obtenerMaestro = async (req = request, res = response) => {
     res.send(maestros);
 }
 
-const editarMaestro = (req = request, res = response) => {
-    res.send({ mensaje: 'Peticion put' });
+const editarMaestro = async (req = request, res = response) => {
+    let maestros = await Maestros.findByPk(req.params.id)
+
+        if (maestros) {
+
+            await maestros.update({
+                nombreUsuario: req.body.nombreUsuario,
+                descripcion: req.body.descripcion,
+                password: req.body.password,
+                codigoSeguridad: req.body.codigoSeguridad,
+                //PersonaId: newPersona.id
+            });
+        }
+    res.send(maestros);
 }
 
-const eliminarMaestro = (req = request, res = response) => {
-    res.send({ mensaje: 'Peticion delete' });
+const eliminarMaestro = async (req = request, res = response) => {
+    let maestro = await Maestros.destroy({
+        where: {
+            id: req.params.id
+        }
+    });
+     res.status(maestro).send({ mensaje: 'Peticion delete' })
 }
 
 const getIdiomasPorMaestro = async (req = request, res = response) => {
