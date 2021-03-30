@@ -34,7 +34,7 @@ const agregarSeccion = async (req = request, res = response) => {
         horaFin: req.body.horaFin,	
         cuposMaximos: req.body.cuposMaximos,
         dias: req.body.dias,
-        idioamaId: newIdiomaId
+        idioamaId: newIdioma.id
     });
 
     res.send(newSeccion);
