@@ -1,10 +1,10 @@
 const { request, response } = require("express");
 const Personas = require('../models').Persona;
-const Estudiantes = require('../models').Estudiante;
+const Adminstrador = require('../models').Adminstrador;
 const Correos = require('../models').Correo;
 
 
-const agregarEstudiante = async (req = request, res = response) => {
+const agregarAdministrador = async (req = request, res = response) => {
 
     let newPersona = await Personas.create({
         nombreCompleto: req.body.nombreCompleto,
@@ -19,20 +19,19 @@ const agregarEstudiante = async (req = request, res = response) => {
         PersonaId: newPersona.id
     });
 
-    let newEstudiante = await Estudiantes.create({
-        fechaRegistro: req.body.fechaRegistro,
-        password: req.body.password,
-        codigoSeguridad: req.body.codigoSeguridad,
+    let newAdministrador = await Adminstradors.create({
         nombreUsuario: req.body.nombreUsuario,
+        descripcion: req.body.descripcion,
+        password: req.body.password,
         PersonaId: newPersona.id
     });
 
-    res.send(newEstudiante);
+    res.send(newAdministrador);
 }
 
-const obtenerEstudiantes = async (req = request, res = response) => {
+const obtenerAdministradores = async (req = request, res = response) => {
 
-    let estudiantes = await Estudiantes.findAll({
+    let administradores = await Adminitradors.findAll({
         include: [
             {
                 model: Personas,
@@ -43,12 +42,12 @@ const obtenerEstudiantes = async (req = request, res = response) => {
         ]
     });
 
-    res.send(estudiantes);
+    res.send(administradores);
 }
 
-const obtenerEstudiante = async (req = request, res = response) => {
+const obtenerAdministrador = async (req = request, res = response) => {
 
-    let estudiante = await Estudiantes.findAll({
+    let administrador = await Adminitradors.findAll({
         where: {
             id: req.params.id
         },
@@ -58,18 +57,18 @@ const obtenerEstudiante = async (req = request, res = response) => {
         }]
     });
 
-    res.send(estudiante);
+    res.send(administrador);
 }
 
-const editarEstudiante = (req = request, res = response) => {
+const editarAdministrador = (req = request, res = response) => {
     res.send({ mensaje: 'Peticion put' });
 }
 
-const eliminarEstudiante = (req = request, res = response) => {
+const eliminarAdministrador = (req = request, res = response) => {
     res.send({ mensaje: 'Peticion delete' });
 }
 
-const getIdiomasPorEstudiante = async (req = request, res = response) => {
+/*const getIdiomasPorEstudiante = async (req = request, res = response) => {
 
     let data = await Asignacions.findAll({
         where: {
@@ -86,15 +85,15 @@ const getIdiomasPorEstudiante = async (req = request, res = response) => {
     });
 
     res.send(data);
-}
+}*/
 
 
 module.exports = {
-    agregarEstudiante,
-    obtenerEstudiantes,
-    obtenerEstudiante,
-    editarEstudiante,
-    eliminarEstudiante,
-    getIdiomasPorEstudiante
+    agregarAdministrador,
+    obtenerAdministrador,
+    obtenerAdministradores,
+    editarAdministrador,
+    eliminarAdministrador,
+    //getIdiomasPorEstudiante
 
 }
