@@ -16,6 +16,9 @@ var rutaEstudiantes = require('./router/estudiante');
 var rutaCorreo = require('./router/correo');
 var rutaIdioma = require('./router/idioma');
 var rutaMaestro = require('./router/maestro');
+var rutaMatricula = require('./router/matricula');
+var rutaSeccion = require('./router/seccion');
+var rutaFactura = require('./router/factura');
 
 
 // uso de rutas
@@ -26,6 +29,9 @@ app.use('/estudiante', rutaEstudiantes);
 app.use('/correo', rutaCorreo);
 app.use('/idioma', rutaIdioma);
 app.use('/maestro', rutaMaestro);
+app.use('/matricula', rutaMatricula);
+app.use('/seccion', rutaSeccion)
+app.use('/factura', rutaFactura);
 
 
 
