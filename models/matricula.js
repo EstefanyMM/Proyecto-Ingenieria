@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Matricula.belongsTo(models.Estudiante)
       Matricula.belongsTo(models.Seccion)
       Matricula.belongsTo(models.Factura)
-      Matricula.belongsTo(models.MAestro)
+      Matricula.belongsTo(models.Maestro)
 
     }
   };

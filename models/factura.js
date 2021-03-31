@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Factura.hasMany(models.Matricula)
+
     }
   };
   Factura.init({

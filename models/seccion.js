@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Seccion.belongsTo(models.Idioma)
+      Seccion.hasMany(models.Matricula)
     }
   };
   Seccion.init({
