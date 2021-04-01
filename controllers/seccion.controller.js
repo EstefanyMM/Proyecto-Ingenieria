@@ -1,19 +1,56 @@
 const { request, response } = require("express");
-const Seccion = require('../models').Seccion;
+const Seccions = require('../models').Seccion;
+const Idioma = require('../models').Idioma;
+
+const agregarSeccion = async (req = request, res = response) => {
+
+    let newIdioma = await Idioma.create({
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion,
+        precio: req.body.precio,
+        totalEstudiante: req.body.totalEstudiante	
+    });
+
+    let newSeccion = await Seccions.create({
+        horaInicio: req.body.horaInicio,	
+        horaFin: req.body.horaFin,	
+        cuposMaximos: req.body.cuposMaximos,
+        dias: req.body.dias,
+        IdiomaId: newIdioma.id
+    });
+
+    res.send(newSeccion);
+}
 
 const obtenerSecciones = async (req = request, res = response) => {
     
-    let seccion = await Seccion.findAll();
+    let seccion = await Seccions.findAll({
+        include: [
+            {
+                model: Idioma,
+    
+            }
+            
+        ]
+    });
 
     res.send(seccion);
 }
 
 const obtenerSeccion = async (req = request, res = response) => {
     
-    let seccion = await Seccion.findOne({
+    let seccion = await Seccions.findOne({
         where : {
             id: req.params.id
-        }
+        },
+        include: [
+            {
+                model: Idioma,
+    
+            }
+            
+        ]
+
     });
 
     res.send(seccion);
@@ -27,18 +64,7 @@ const eliminarSeccion = (req = request, res = response) => {
     res.send({ mensaje: 'Peticion delete' });
 }
 
-const agregarSeccion = async (req = request, res = response) => {
 
-    let newSeccion = await Seccion.create({
-        horaInicio: req.body.horaInicio,	
-        horaFin: req.body.horaFin,	
-        cuposMaximos: req.body.cuposMaximos,
-        dias: req.body.dias,
-        idioamaId: newIdioma.id
-    });
-
-    res.send(newSeccion);
-}
 
 
 module.exports = {

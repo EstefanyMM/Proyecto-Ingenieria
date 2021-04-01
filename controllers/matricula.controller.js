@@ -9,10 +9,10 @@ const agregarMatricula = async (req = request, res = response) => {
 
     let newMatricula = await Matricula.create({
         estadoCuenta: req.body.estadoCuenta,	
-        EstudianteId: req.body.EstudianteId,
-        FacturaId: req.body.FacturaId,	
-        MaestroId: req.body.MaestroId,
-        SeccionId: req.body.SeccionId
+        EstudianteId: newEstudiante.id,
+        FacturaId: newFactura.id,	
+        MaestroId: newMaestro.id,
+        SeccionId: newSeccion.id
     });
 
     res.send(newMatricula);
@@ -21,7 +21,7 @@ const agregarMatricula = async (req = request, res = response) => {
 
 const getMatriculas = async (req = request, res = response) => {
     
-    let matriculas = await Matricula.findAll();
+    let matriculas = await Matricula.findAll({
       include:[
           {
               model: Estudiantes
@@ -36,6 +36,7 @@ const getMatriculas = async (req = request, res = response) => {
               model: Seccion
           }
       ]
+    });
      
     res.send(matriculas);
 }
