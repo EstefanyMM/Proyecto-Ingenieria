@@ -2,7 +2,8 @@ const { request, response } = require("express");
 const Personas = require('../models').Persona;
 const Maestros = require('../models').Maestro;
 const Correos = require('../models').Correo;
-
+const Idiomas = require('../models').Idioma;
+const MaestroIdiomas = require('../models').MaestroIdioma;
 
 const agregarMaestro = async (req = request, res = response) => {
 
@@ -20,10 +21,10 @@ const agregarMaestro = async (req = request, res = response) => {
     });
 
     let newMaestro = await Maestros.create({
-        nombreUsuario: req.body.nombreUsuario,
         descripcion: req.body.descripcion,
         password: req.body.password,
         codigoSeguridad: req.body.codigoSeguridad,
+        nombreUsuario: req.body.nombreUsuario,
         PersonaId: newPersona.id
     });
 
@@ -67,10 +68,10 @@ const editarMaestro = async (req = request, res = response) => {
         if (maestros) {
 
             await maestros.update({
-                nombreUsuario: req.body.nombreUsuario,
                 descripcion: req.body.descripcion,
                 password: req.body.password,
                 codigoSeguridad: req.body.codigoSeguridad,
+                nombreUsuario: req.body.nombreUsuario
                 //PersonaId: newPersona.id
             });
         }
@@ -78,27 +79,28 @@ const editarMaestro = async (req = request, res = response) => {
 }
 
 const eliminarMaestro = async (req = request, res = response) => {
-    let maestro = await Maestros.destroy({
+    //let maestro = 
+    await Maestros.destroy({
         where: {
             id: req.params.id
         }
     });
-     res.status(maestro).send({ mensaje: 'Peticion delete' })
+    res.send({ok: true});
 }
 
 const getIdiomasPorMaestro = async (req = request, res = response) => {
 
-    let data = await Asignacions.findAll({
+    let data = await MaestroIdiomas.findAll({
         where: {
-            estudianteid: req.params.id
+            MaestroId: req.params.id
         },
-        // include: [
-        //     {
-        //         model: Idiomas
-        //     }, {
-        //         model: Estudiantes
-        //     }
-        // ]
+        include: [
+            {
+                model: Idiomas
+            }, {
+               model: Maestros
+            }
+        ]
 
     });
 
@@ -113,5 +115,4 @@ module.exports = {
     editarMaestro,
     eliminarMaestro,
     getIdiomasPorMaestro
-
 }

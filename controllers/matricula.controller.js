@@ -1,63 +1,54 @@
 const { request, response } = require("express");
-const Matricula = require('../models').Matricula;
+const Matriculas = require('../models').Matricula;
+const Secciones = require('../models').Seccion;
+const Facturas = require('../models').Factura;
 const Estudiantes = require('../models').Estudiante;
-const Factura = require('../models').Factura;
 const Maestros = require('../models').Maestro;
-const Seccion = require('../models').Seccion;
-
-const agregarMatricula = async (req = request, res = response) => {
-
-    let newMatricula = await Matricula.create({
-        estadoCuenta: req.body.estadoCuenta,	
-        EstudianteId: req.body.EstudianteId,
-        FacturaId: req.body.FacturaId,	
-        MaestroId: req.body.MaestroId,
-        SeccionId: req.body.SeccionId
-    });
-
-    res.send(newMatricula);
-}
-
+const Idiomas = require('../models').Idioma;
+const SeccionIdiomas = require('../models').SeccionIdioma;
 
 const getMatriculas = async (req = request, res = response) => {
     
-    let matriculas = await Matricula.findAll();
-      include:[
-          {
-              model: Estudiantes
-          },
-          {
-              model: Factura
-          },
-          {
-              model: Maestros
-          },
-          {
-              model: Seccion
-          }
-      ]
-     
+    let matriculas = await Matriculas.findAll({
+        include: [
+            {
+                model: SeccionIdiomas,
+                include: [{model: Idiomas},{model: Secciones}]
+            },
+            {
+                model: Facturas
+            },
+            {
+                model: Estudiantes
+            },
+            {
+                model: Maestros
+            }
+        ]
+    });
+
     res.send(matriculas);
 }
 
 const getMatricula = async (req = request, res = response) => {
     
-    let natricula = await Matricula.findOne({
+    let matricula = await Matriculas.findOne({
         where : {
             id: req.params.id
         },
-        include:[
+        include: [
+            {
+                model: SeccionIdiomas,
+                include: [{model: Idiomas}, {model: Secciones}]
+            },
+            {
+                model: Facturas
+            },
             {
                 model: Estudiantes
             },
             {
-                model: Factura
-            },
-            {
                 model: Maestros
-            },
-            {
-                model: Seccion
             }
         ]
     });
@@ -65,12 +56,43 @@ const getMatricula = async (req = request, res = response) => {
     res.send(matricula);
 }
 
-const editarMatricula = (req = request, res = response) => {
-    res.send({ mensaje: 'Peticion put' });
+const editarMatricula = async (req = request, res = response) => {
+    let matriculas = await Matriculas.findByPk(req.params.id)
+
+        if (matriculas) {
+
+            await matriculas.update({
+                estadoCuenta: req.body.estadoCuenta,	
+                EstudianteId: req.body.EstudianteId,	
+                SeccionIdiomaId: req.body.SeccionIdiomaId,
+                FacturaId: req.body.FacturaId,
+                MaestroId: req.body.MaestroId
+            });
+        }
+    res.send(matriculas);
 }
 
-const eliminarMatricula = (req = request, res = response) => {
-    res.send({ mensaje: 'Peticion delete' });
+const eliminarMatricula = async (req = request, res = response) => {
+    //let matricula = 
+    await Matriculas.destroy({
+        where: {
+            id: req.params.id
+        }
+    });
+    res.send({ok: true});
+}
+
+const agregarMatricula = async (req = request, res = response) => {
+
+    let newMatricula = await Matriculas.create({
+        estadoCuenta: req.body.estadoCuenta,	
+        EstudianteId: req.body.EstudianteId,	
+        SeccionIdiomaId: req.body.SeccionIdiomaId,
+        FacturaId: req.body.FacturaId,
+        MaestroId: req.body.MaestroId
+    });
+
+    res.send(newMatricula);
 }
 
 

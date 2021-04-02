@@ -19,12 +19,26 @@ const obtenerCorreo = async (req = request, res = response) => {
     res.send(correo);
 }
 
-const editarCorreo = (req = request, res = response) => {
-    res.send({ mensaje: 'Peticion put' });
+const editarCorreo = async (req = request, res = response) => {
+    let correos = await Correos.findByPk(req.params.id)
+
+        if (correos) {
+
+            await correos.update({
+                email: req.body.email
+            });
+        }
+    res.send(correos);
 }
 
-const eliminarCorreo = (req = request, res = response) => {
-    res.send({ mensaje: 'Peticion delete' });
+const eliminarCorreo = async (req = request, res = response) => {
+    //let correo = 
+    await Correos.destroy({
+        where: {
+            id: req.params.id
+        }
+    });
+    res.send({ok: true});
 }
 
 const agregarCorreo = async (req = request, res = response) => {

@@ -1,6 +1,6 @@
 const { request, response } = require("express");
 const Personas = require('../models').Persona;
-const Adminstrador = require('../models').Adminstrador;
+const Administradors = require('../models').Administrador;
 const Correos = require('../models').Correo;
 
 
@@ -19,19 +19,19 @@ const agregarAdministrador = async (req = request, res = response) => {
         PersonaId: newPersona.id
     });
 
-    let newAdministrador = await Adminstradors.create({
-        nombreUsuario: req.body.nombreUsuario,
+    let newAdministrador = await Administradors.create({
         descripcion: req.body.descripcion,
         password: req.body.password,
+        nombreUsuario: req.body.nombreUsuario,
         PersonaId: newPersona.id
     });
 
     res.send(newAdministrador);
 }
 
-const obtenerAdministradores = async (req = request, res = response) => {
+const obtenerAdministradors = async (req = request, res = response) => {
 
-    let administradores = await Adminitradors.findAll({
+    let administradors = await Administradors.findAll({
         include: [
             {
                 model: Personas,
@@ -42,12 +42,12 @@ const obtenerAdministradores = async (req = request, res = response) => {
         ]
     });
 
-    res.send(administradores);
+    res.send(administradors);
 }
 
 const obtenerAdministrador = async (req = request, res = response) => {
 
-    let administrador = await Adminitradors.findAll({
+    let administrador = await Administradors.findAll({
         where: {
             id: req.params.id
         },
@@ -60,40 +60,36 @@ const obtenerAdministrador = async (req = request, res = response) => {
     res.send(administrador);
 }
 
-const editarAdministrador = (req = request, res = response) => {
-    res.send({ mensaje: 'Peticion put' });
+const editarAdministrador = async (req = request, res = response) => {
+    let administradors = await Administradors.findByPk(req.params.id)
+
+        if (administradors) {
+
+            await administradors.update({
+                descripcion: req.body.descripcion,
+                password: req.body.password,
+                nombreUsuario: req.body.nombreUsuario
+                //PersonaId: newPersona.id
+            });
+        }
+    res.send(administradors);
 }
 
-const eliminarAdministrador = (req = request, res = response) => {
-    res.send({ mensaje: 'Peticion delete' });
-}
-
-/*const getIdiomasPorEstudiante = async (req = request, res = response) => {
-
-    let data = await Asignacions.findAll({
+const eliminarAdministrador = async (req = request, res = response) => {
+    let administrador = await Administradors.destroy({
         where: {
-            estudianteid: req.params.id
-        },
-        // include: [
-        //     {
-        //         model: Idiomas
-        //     }, {
-        //         model: Estudiantes
-        //     }
-        // ]
-
+            id: req.params.id
+        }
     });
-
-    res.send(data);
-}*/
+     res.status(administrador).send({ mensaje: 'Peticion delete' })
+}
 
 
 module.exports = {
     agregarAdministrador,
+    obtenerAdministradors,
     obtenerAdministrador,
-    obtenerAdministradores,
     editarAdministrador,
-    eliminarAdministrador,
-    //getIdiomasPorEstudiante
+    eliminarAdministrador
 
 }
