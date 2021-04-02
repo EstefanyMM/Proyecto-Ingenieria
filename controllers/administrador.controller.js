@@ -76,12 +76,13 @@ const editarAdministrador = async (req = request, res = response) => {
 }
 
 const eliminarAdministrador = async (req = request, res = response) => {
-    let administrador = await Administradors.destroy({
+    //let administrador = 
+    await Administradors.destroy({
         where: {
             id: req.params.id
         }
     });
-     res.status(administrador).send({ mensaje: 'Peticion delete' })
+    res.send({ok: true});
 }
 
 
