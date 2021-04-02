@@ -12,10 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Matricula.belongsTo(models.Estudiante)
-      Matricula.belongsTo(models.Seccion)
+      Matricula.belongsTo(models.SeccionIdioma)
       Matricula.belongsTo(models.Factura)
       Matricula.belongsTo(models.Maestro)
-
     }
   };
   Matricula.init({

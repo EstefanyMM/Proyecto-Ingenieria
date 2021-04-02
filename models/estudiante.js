@@ -13,13 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Estudiante.belongsTo(models.Persona)
       Estudiante.hasMany(models.Matricula)
+      Estudiante.hasMany(models.EstudianteIdioma)
     }
   };
   Estudiante.init({
-    nombreUsuario: DataTypes.STRING,
     fechaRegistro: DataTypes.DATE,
     password: DataTypes.STRING,
-    codigoSeguridad: DataTypes.STRING
+    codigoSeguridad: DataTypes.STRING,
+    nombreUsuario: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Estudiante',

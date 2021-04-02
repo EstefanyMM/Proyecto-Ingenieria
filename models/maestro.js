@@ -12,14 +12,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Maestro.belongsTo(models.Persona)
+      Maestro.hasMany(models.MaestroIdioma)
       Maestro.hasMany(models.Matricula)
     }
   };
   Maestro.init({
-    nombreUsuario: DataTypes.STRING,
     descripcion: DataTypes.STRING,
     password: DataTypes.STRING,
-    codigoSeguridad: DataTypes.STRING
+    codigoSeguridad: DataTypes.STRING,
+    nombreUsuario: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Maestro',
