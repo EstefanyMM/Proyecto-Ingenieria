@@ -13,7 +13,6 @@ router.put('/:id', maestro.editarMaestro);
 
 router.delete('/:id', maestro.eliminarMaestro);
 
- router.get('/idioma/:id',maestro.getIdiomasPorMaestro);
-
+router.get('/idioma/:id', maestro.getIdiomasPorMaestro);
 
 module.exports = router;

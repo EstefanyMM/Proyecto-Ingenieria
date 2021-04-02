@@ -9,10 +9,12 @@ router.get('/:id', idioma.obtenerIdioma);
 
 router.post('/', idioma.agregarIdioma);
 
-router.put('/', idioma.editarIdioma);
+router.put('/:id', idioma.editarIdioma);
 
-router.delete('/', idioma.eliminarIdioma);
+router.delete('/:id', idioma.eliminarIdioma);
 
+router.get('/asignacion/:id', idioma.getAsignacionesporIdioma);
 
+router.get('/archivo/:id', idioma.getArchivoporIdioma);
 
 module.exports = router;

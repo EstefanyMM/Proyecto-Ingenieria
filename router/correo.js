@@ -1,18 +1,16 @@
 const express = require('express');
-const correo = require('../controllers/correo.controller');
+const {obtenerCorreos, editarCorreo, agregarCorreo, eliminarCorreo, obtenerCorreo} = require('../controllers/correo.controller');
+
 const router = express.Router();
 
+router.get('/', obtenerCorreos);
 
-router.get('/', correo.obtenerCorreos);
+router.get('/:id', obtenerCorreo);
 
-router.get('/:id', correo.obtenerCorreo);
+router.post('/', agregarCorreo);
 
-router.post('/', correo.agregarCorreo);
+router.put('/:id', editarCorreo);
 
-router.put('/', correo.editarCorreo);
-
-router.delete('/', correo.eliminarCorreo);
-
-
+router.delete('/:id', eliminarCorreo);
 
 module.exports = router;
