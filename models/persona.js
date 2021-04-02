@@ -14,13 +14,14 @@ module.exports = (sequelize, DataTypes) => {
       Persona.hasMany(models.Estudiante)
       Persona.hasMany(models.Correo)
       Persona.hasMany(models.Maestro)
+      Persona.hasMany(models.Administrador)
     }
   };
   Persona.init({
     nombreCompleto: DataTypes.STRING,
     numeroIdentidad: DataTypes.STRING,
     direccion: DataTypes.STRING,
-    edad: DataTypes.STRING,
+    edad: DataTypes.INTEGER,
     numeroTelefono: DataTypes.STRING
   }, {
     sequelize,

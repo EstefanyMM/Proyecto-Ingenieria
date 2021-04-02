@@ -8,32 +8,44 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(cors());
 
-// Importar rutas
-var rutaUsuario = require('./router/usuario');
+//Importar Rutas
 var rutaPersona = require('./router/persona');
-var rutaCalificacion = require('./router/calificaciones');
-var rutaEstudiantes = require('./router/estudiante');
+var rutaEstudiante = require('./router/estudiante');
 var rutaCorreo = require('./router/correo');
-var rutaIdioma = require('./router/idioma');
 var rutaMaestro = require('./router/maestro');
-var rutaMatricula = require('./router/matricula');
+var rutaAdministrador = require('./router/administrador');
+var rutaIdioma = require('./router/idioma');
+var rutaMaestroIdioma = require('./router/maestroIdioma');
 var rutaSeccion = require('./router/seccion');
+var rutaSeccionIdioma = require('./router/seccionIdioma');
 var rutaFactura = require('./router/factura');
+var rutaMatricula = require('./router/matricula');
+var rutaCalificacion = require('./router/calificacion');
+var rutaEstudianteIdioma = require('./router/estudianteIdioma');
+var rutaEvento = require('./router/evento');
+var rutaAsignacion = require('./router/asignacion');
+var rutaAsignacionIdioma = require('./router/asignacionIdioma');
+var rutaArchivo = require('./router/archivo');
+var rutaArchivoIdioma = require('./router/archivoIdioma');
 
-
-// uso de rutas
-app.use('/usuario', rutaUsuario);
+//Uso de rutas
 app.use('/persona', rutaPersona);
-app.use('/calificaciones', rutaCalificacion);
-app.use('/estudiante', rutaEstudiantes);
+app.use('/estudiante', rutaEstudiante);
 app.use('/correo', rutaCorreo);
-app.use('/idioma', rutaIdioma);
 app.use('/maestro', rutaMaestro);
-app.use('/matricula', rutaMatricula);
-app.use('/seccion', rutaSeccion)
+app.use('/administrador', rutaAdministrador);
+app.use('/idioma', rutaIdioma);
+app.use('/maestroIdioma', rutaMaestroIdioma);
+app.use('/seccion', rutaSeccion);
+app.use('/seccionIdioma', rutaSeccionIdioma)
 app.use('/factura', rutaFactura);
+app.use('/matricula', rutaMatricula);
+app.use('/calificacion', rutaCalificacion);
+app.use('/estudianteIdioma', rutaEstudianteIdioma);
+app.use('/evento', rutaEvento);
+app.use('/asignacion', rutaAsignacion);
+app.use('/asignacionIdioma', rutaAsignacionIdioma);
+app.use('/archivo', rutaArchivo);
+app.use('/archivoIdioma', rutaArchivoIdioma);
 
-
-
-
-app.listen(4000, ()=>{ console.log('Servidor en el puerto 4000') });
+app.listen(3001, ()=>{ console.log('Servidor en el puerto 3001') });

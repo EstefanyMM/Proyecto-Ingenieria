@@ -11,12 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Administrador.belongsTo(models.Persona)
     }
   };
   Administrador.init({
-    nombreUsuario: DataTypes.STRING,
     descripcion: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    nombreUsuario: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Administrador',

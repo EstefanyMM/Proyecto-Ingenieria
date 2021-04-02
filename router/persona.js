@@ -1,5 +1,5 @@
 const express = require('express');
-const { getPersonas, getPersona, agregarPersona, editarPersona, eliminarPersona, getIdiomasPorEstudiante } = require('../controllers/persona.controller');
+const { getPersonas, editarPersona, agregarPersona, eliminarPersona, getPersona} = require('../controllers/persona.controller');
 
 const router = express.Router();
 
@@ -9,12 +9,8 @@ router.get('/:id', getPersona);
 
 router.post('/', agregarPersona);
 
-router.put('/', editarPersona);
+router.put('/:id', editarPersona);
 
-router.delete('/', eliminarPersona);
-
-router.get('/idioma/:id', getIdiomasPorEstudiante);
-
+router.delete('/:id', eliminarPersona);
 
 module.exports = router;
-

@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Idioma.hasMany(models.Seccion)
+      Idioma.hasMany(models.MaestroIdioma)
+      Idioma.hasMany(models.SeccionIdioma)
+      Idioma.hasMany(models.EstudianteIdioma)
+      Idioma.hasMany(models.AsignacionIdioma)
+      Idioma.hasMany(models.ArchivoIdioma)
     }
   };
   Idioma.init({

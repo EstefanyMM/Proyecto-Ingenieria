@@ -10,8 +10,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Seccion.belongsTo(models.Idioma)
-      Seccion.hasMany(models.Matricula)
+      // define association here
+      Seccion.hasMany(models.SeccionIdioma)
+      //Seccion.hasMany(models.Matricula)
     }
   };
   Seccion.init({
