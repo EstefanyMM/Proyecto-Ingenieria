@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const { request, response } = require("express");
 const Seccions = require('../models').Seccion;
 const Idioma = require('../models').Idioma;
@@ -74,7 +74,7 @@ module.exports = {
     agregarSeccion,
     eliminarSeccion,
     obtenerSecciones
-=======
+
 const { request, response } = require("express");
 const Secciones = require('../models').Seccion;
 const Idiomas = require('../models').Idioma;
