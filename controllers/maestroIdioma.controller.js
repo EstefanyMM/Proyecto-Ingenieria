@@ -1,9 +1,20 @@
 const { request, response } = require("express");
+const Maestros = require('../models').Maestro;
+const Idiomas = require('../models').Idioma;
 const MaestroIdiomas = require('../models').MaestroIdioma;
 
 const obtenerMaestroIdiomas = async (req = request, res = response) => {
     
-    let maestroIdiomas = await MaestroIdiomas.findAll();
+    let maestroIdiomas = await MaestroIdiomas.findAll({
+        include: [
+            {
+                model: Maestros
+            },{
+                model: Idiomas
+
+            }     
+        ]
+    });
 
     res.send(maestroIdiomas);
 }
@@ -13,7 +24,15 @@ const obtenerMaestroIdioma = async (req = request, res = response) => {
     let maestroIdioma = await MaestroIdiomas.findOne({
         where : {
             id: req.params.id
-        }
+        },
+        include: [
+            {
+                model: Maestros
+            },{
+                model: Idiomas
+
+            }     
+        ]
     });
 
     res.send(maestroIdioma);
@@ -53,6 +72,8 @@ const agregarMaestroIdioma = async (req = request, res = response) => {
 
     res.send(newMaestroIdioma);
 }
+
+
 
 
 module.exports = {

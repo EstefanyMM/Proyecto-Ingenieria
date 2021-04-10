@@ -37,10 +37,10 @@ const obtenerMaestros = async (req = request, res = response) => {
         include: [
             {
                 model: Personas,
-                include:[{ model: Correos}]
+                include: [{ model: Correos }]
 
             }
-            
+
         ]
     });
 
@@ -49,13 +49,13 @@ const obtenerMaestros = async (req = request, res = response) => {
 
 const obtenerMaestro = async (req = request, res = response) => {
 
-    let maestros = await Maestros.findAll({
+    let maestros = await Maestros.findOne({
         where: {
             id: req.params.id
         },
         include: [{
             model: Personas,
-            include:[{ model: Correos}]
+            include: [{ model: Correos }]
         }]
     });
 
@@ -65,16 +65,16 @@ const obtenerMaestro = async (req = request, res = response) => {
 const editarMaestro = async (req = request, res = response) => {
     let maestros = await Maestros.findByPk(req.params.id)
 
-        if (maestros) {
+    if (maestros) {
 
-            await maestros.update({
-                descripcion: req.body.descripcion,
-                password: req.body.password,
-                codigoSeguridad: req.body.codigoSeguridad,
-                nombreUsuario: req.body.nombreUsuario
-                //PersonaId: newPersona.id
-            });
-        }
+        await maestros.update({
+            descripcion: req.body.descripcion,
+            password: req.body.password,
+            codigoSeguridad: req.body.codigoSeguridad,
+            nombreUsuario: req.body.nombreUsuario
+            //PersonaId: newPersona.id
+        });
+    }
     res.send(maestros);
 }
 
@@ -85,28 +85,39 @@ const eliminarMaestro = async (req = request, res = response) => {
             id: req.params.id
         }
     });
-    res.send({ok: true});
+    res.send({ ok: true });
 }
 
 const getIdiomasPorMaestro = async (req = request, res = response) => {
 
-    let data = await MaestroIdiomas.findAll({
+    let maestro = await MaestroIdiomas.findAll({
         where: {
             MaestroId: req.params.id
         },
         include: [
             {
                 model: Idiomas
-            }, {
-               model: Maestros
             }
         ]
+    }); res.send(maestro)
 
-    });
-
-    res.send(data);
 }
 
+const loginn = async (req = request, res = response) => {
+
+    let maestro = await Maestros.findOne({
+        where: {
+            nombreUsuario: req.body.nombreUsuario,
+            password: req.body.password
+        }
+    });
+    if (maestro.id) {
+        res.send({ Id: maestro.id, auth: true });
+    }
+    else {
+        res.send({ auth: false });
+    }
+}
 
 module.exports = {
     agregarMaestro,
@@ -114,5 +125,6 @@ module.exports = {
     obtenerMaestro,
     editarMaestro,
     eliminarMaestro,
-    getIdiomasPorMaestro
+    getIdiomasPorMaestro,
+    loginn
 }

@@ -1,12 +1,15 @@
 const express = require('express');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
+
 
 const app = express();
 
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 app.use(cors());
+app.use(fileUpload());
 
 //Importar Rutas
 var rutaPersona = require('./router/persona');
@@ -48,4 +51,4 @@ app.use('/asignacionIdioma', rutaAsignacionIdioma);
 app.use('/archivo', rutaArchivo);
 app.use('/archivoIdioma', rutaArchivoIdioma);
 
-app.listen(3001, ()=>{ console.log('Servidor en el puerto 3001') });
+app.listen(4000, () => { console.log('Servidor en el puerto 4000') });

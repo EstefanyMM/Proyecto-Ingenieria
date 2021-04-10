@@ -34,6 +34,10 @@ npx sequelize-cli model:generate --name Calificacion --attributes nota:float, es
 //tabla estudianteIdioma
 npx sequelize-cli model:generate --name EstudianteIdioma --attributes descripcion:string
 
+//tabla asignacion
+npx sequelize-cli model:generate --name Tarea --attributes nombre:string,descripcion:string,fecha:date,valor:integer
+
+
 //relacion tabla Persona-Estudiante
 npx sequelize-cli migration:generate --name relacion-persona-estudiante
 
@@ -56,12 +60,12 @@ npx sequelize-cli migration:generate --name relacion-seccion-idioma
 npx sequelize-cli migration:generate --name relacion-matricula-estudiante
 
 //relacion tabla Estudiante-EstudianteIdiomas
-npx sequelize-cli migration:generate --name relacion-estudiante-estudianteIdioma
+npx sequelize-cli migration:generate --name relacion-estudiante-
 
 
 //crear tabla
 npx sequelize-cli db:migrate
 
 //eliminar tabla
-npx sequelize-cli db:migrate:undo //solo elimina la tabla mas reciente que se creo
+npx sequelize-cli db:migrate:undo //solo elimina lo mas reciente que se creo
 

@@ -13,6 +13,6 @@ router.put('/:id', seccion.editarSeccion);
 
 router.delete('/:id', seccion.eliminarSeccion);
 
-router.get('/idioma/:id', seccion.getSeccionIdioma)
+//router.get('/idioma/:id', seccion.getSeccionIdioma)
 
 module.exports = router;

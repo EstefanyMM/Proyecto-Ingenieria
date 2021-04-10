@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.sequelize.transaction(t => {
       return Promise.all([
 
-        queryInterface.addColumn('Administradors', 'personaId', {
+        queryInterface.addColumn('Administradors', 'idPersona', {
           type: Sequelize.DataTypes.INTEGER,
           references: {
             model: 'Personas',
@@ -23,7 +23,7 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     return queryInterface.sequelize.transaction(t => {
       return Promise.all([
-        queryInterface.removeColumn('Adminisradors', 'personaId', { transaction: t }),
+        queryInterface.removeColumn('Adminisradors', 'idPersona', { transaction: t }),
       ])
     })
     

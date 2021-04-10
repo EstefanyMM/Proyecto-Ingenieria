@@ -1,7 +1,7 @@
 
 const { request, response } = require("express");
 const Seccions = require('../models').Seccion;
-const Idioma = require('../models').Idioma;
+const Idiomas = require('../models').Idioma;
 
 const agregarSeccion = async (req = request, res = response) => {
 
@@ -26,13 +26,7 @@ const agregarSeccion = async (req = request, res = response) => {
 const obtenerSecciones = async (req = request, res = response) => {
     
     let seccion = await Seccions.findAll({
-        include: [
-            {
-                model: Idioma,
-    
-            }
-            
-        ]
+       
     });
 
     res.send(seccion);
@@ -46,7 +40,7 @@ const obtenerSeccion = async (req = request, res = response) => {
         },
         include: [
             {
-                model: Idioma,
+                model: Idiomas,
     
             }
             

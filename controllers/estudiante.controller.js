@@ -11,10 +11,10 @@ const getEstudiantes = async (req = request, res = response) => {
         include: [
             {
                 model: Personas,
-                include:[{ model: Correos}]
+                include: [{ model: Correos }]
 
             }
-            
+
         ]
     });
 
@@ -24,12 +24,12 @@ const getEstudiantes = async (req = request, res = response) => {
 const getEstudiante = async (req = request, res = response) => {
 
     let estudiante = await Estudiantes.findOne({
-        where : {
+        where: {
             id: req.params.id
         },
         include: [{
             model: Personas,
-            include:[{ model: Correos}]
+            include: [{ model: Correos }]
         }]
     });
 
@@ -39,16 +39,16 @@ const getEstudiante = async (req = request, res = response) => {
 const editarEstudiante = async (req = request, res = response) => {
     let estudiantes = await Estudiantes.findByPk(req.params.id)
 
-        if (estudiantes) {
+    if (estudiantes) {
 
-            await estudiantes.update({
-                fechaRegistro: req.body.fechaRegistro,
-                password: req.body.password,
-                codigoSeguridad: req.body.codigoSeguridad,
-                nombreUsuario: req.body.nombreUsuario
-                //PersonaId: newPersona.id
-            });
-        }
+        await estudiantes.update({
+            fechaRegistro: req.body.fechaRegistro,
+            password: req.body.password,
+            codigoSeguridad: req.body.codigoSeguridad,
+            nombreUsuario: req.body.nombreUsuario
+            //PersonaId: newPersona.id
+        });
+    }
     res.send(estudiantes);
 }
 
@@ -59,7 +59,7 @@ const eliminarEstudiante = async (req = request, res = response) => {
             id: req.params.id
         }
     });
-    res.send({ok: true});
+    res.send({ ok: true });
 }
 
 const agregarEstudiante = async (req = request, res = response) => {
@@ -86,25 +86,63 @@ const agregarEstudiante = async (req = request, res = response) => {
     });
 
     res.send(newEstudiante);
+    const nodemailer = require('nodemailer');
+
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'carolinaandrade974@gmail.com',
+            pass: 'Holamundo2021'
+        }
+    });
+
+    let mailOptions = {
+        from: 'carolinaandrade974@gmail.com',
+        to: req.body.email,
+        subject: 'Academia Centroamericana de Honduras',
+        text: 'Bienvenido, gracias por tu preferencia, te ofrecemos los mejores cursos de lenguas extranjeras con los maestros mas capacitados :)'
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
 }
 
-const getIdiomasPorEstudiante = async (req = request, res = response) => {
+const getEstudiantePorIdiomas = async (req = request, res = response) => {
 
-    let data = await EstudianteIdiomas.findAll({
+    let estudiante = await EstudianteIdiomas.findAll({
         where: {
             EstudianteId: req.params.id
         },
         include: [
             {
                 model: Idiomas
-            }, {
-               model: Estudiantes
             }
         ]
 
     });
+    res.send(estudiante);
+}
 
-    res.send(data);
+
+const login = async (req = request, res = response) => {
+
+    let estudiante = await Estudiantes.findOne({
+        where: {
+            nombreUsuario: req.body.nombreUsuario,
+            password: req.body.password
+        }
+    });
+    if (estudiante.id) {
+        res.send({ Id: estudiante.id, auth: true });
+    }
+    else {
+        res.send({ auth: false });
+    }
 }
 
 module.exports = {
@@ -113,5 +151,6 @@ module.exports = {
     eliminarEstudiante,
     agregarEstudiante,
     getEstudiante,
-    getIdiomasPorEstudiante
+    getEstudiantePorIdiomas,
+    login
 }

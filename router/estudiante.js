@@ -1,5 +1,6 @@
 const express = require('express');
-const { getEstudiantes, editarEstudiante, agregarEstudiante, eliminarEstudiante, getEstudiante, getIdiomasPorEstudiante} = require('../controllers/estudiante.controller');
+const { getEstudiantes, editarEstudiante, agregarEstudiante, eliminarEstudiante, 
+        getEstudiante, getIdiomasPorEstudiante, login, getEstudiantePorIdiomas} = require('../controllers/estudiante.controller');
 
 const router = express.Router();
 
@@ -13,6 +14,8 @@ router.put('/:id', editarEstudiante);
 
 router.delete('/:id', eliminarEstudiante);
 
-router.get('/idioma/:id', getIdiomasPorEstudiante);
+router.get('/idioma/:id', getEstudiantePorIdiomas);
+
+router.post('/login', login);
 
 module.exports = router;

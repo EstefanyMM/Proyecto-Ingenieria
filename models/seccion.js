@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Seccion.hasMany(models.SeccionIdioma)
-      //Seccion.hasMany(models.Matricula)
+      Seccion.hasMany(models.Matricula)
     }
   };
   Seccion.init({

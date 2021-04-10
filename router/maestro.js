@@ -15,4 +15,6 @@ router.delete('/:id', maestro.eliminarMaestro);
 
 router.get('/idioma/:id', maestro.getIdiomasPorMaestro);
 
+router.post('/loginn', maestro.loginn);
+
 module.exports = router;
